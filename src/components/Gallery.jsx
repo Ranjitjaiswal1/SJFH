@@ -2,15 +2,18 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 
 const images = [
-    "/WhatsApp Image 2026-03-17 at 8.06.21 PM.jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.21 PM (1).jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.22 PM.jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.22 PM (1).jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.22 PM (2).jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.23 PM.jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.23 PM (1).jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.24 PM.jpeg",
-    "/WhatsApp Image 2026-03-17 at 8.06.24 PM (1).jpeg",
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.21 PM.jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.21 PM (1).jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.22 PM.jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.22 PM (1).jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.22 PM (2).jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.23 PM.jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.23 PM (1).jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.24 PM.jpeg", label: "Furniture" },
+    { src: "/WhatsApp Image 2026-03-17 at 8.06.24 PM (1).jpeg", label: "Furniture" },
+    { src: "/almari.jpeg", label: "Almirah" },
+    { src: "/almari1.jpeg", label: "Almirah" },
+    { src: "/almari2.jpeg", label: "Almirah" },
 ]
 
 export default function Gallery() {
@@ -26,24 +29,25 @@ export default function Gallery() {
                 viewport={{ once: true }}
             >
                 <h2>Our Work Gallery</h2>
-                <p>Real furniture delivered to real homes</p>
-                <div className="underline"></div>
+                <p>Real furniture delivered to real homes across Bihar</p>
+                <div className="underline" style={{ background: "#f5c842" }}></div>
             </motion.div>
 
             <div className="gallery-grid">
-                {images.map((img, i) => (
+                {images.map((item, i) => (
                     <motion.div
                         key={i}
                         className="gallery-item"
-                        initial={{ opacity: 0, scale: 0.85 }}
+                        initial={{ opacity: 0, scale: 0.88 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.45, delay: i * 0.07 }}
+                        transition={{ duration: 0.4, delay: i * 0.06 }}
                         viewport={{ once: true }}
-                        whileHover={{ scale: 1.04, zIndex: 2 }}
-                        onClick={() => setSelected(img)}
+                        onClick={() => setSelected(item.src)}
                     >
-                        <img src={img} alt={`Gallery ${i + 1}`} />
-                        <div className="gallery-overlay">🔍</div>
+                        <img src={item.src} alt={item.label} />
+                        <div className="gallery-overlay">
+                            <span>🔍 {item.label}</span>
+                        </div>
                     </motion.div>
                 ))}
             </div>
@@ -59,11 +63,11 @@ export default function Gallery() {
                     >
                         <motion.img
                             src={selected}
-                            alt="Gallery full"
+                            alt="Full view"
                             className="lightbox-full-img"
-                            initial={{ scale: 0.7, opacity: 0 }}
+                            initial={{ scale: 0.75, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.7, opacity: 0 }}
+                            exit={{ scale: 0.75, opacity: 0 }}
                             transition={{ type: "spring", stiffness: 220, damping: 22 }}
                             onClick={e => e.stopPropagation()}
                         />

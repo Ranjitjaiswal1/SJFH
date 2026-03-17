@@ -810,18 +810,19 @@ body {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .gallery-item {
   position: relative;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  height: 240px;
+  height: 220px;
+  background: #333;
 }
 
 .gallery-item img {
@@ -830,7 +831,7 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.4s;
+  transition: transform 0.4s ease;
 }
 
 .gallery-item:hover img { transform: scale(1.08); }
@@ -838,16 +839,29 @@ body {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
   opacity: 0;
   transition: opacity 0.3s;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
 .lightbox-full-img {
   max-width: 90vw;
@@ -857,10 +871,32 @@ body {
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
-@media (max-width: 768px) {
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 2001;
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
   .gallery-section { padding: 80px 16px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .hero-arrow { display: none; }
+  .gallery-item { height: 160px; }
 }
 
 .hero-customize-text {
