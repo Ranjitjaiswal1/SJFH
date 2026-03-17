@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { motion } from 'framer-motion';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Products from './components/Products';
+import Gallery from './components/Gallery';
+import WhyUs from './components/WhyUs';
+import Reviews from './components/Reviews';
+import Enquiry from './components/Enquiry';
+import Contact from './components/Contact';
+import WhatsAppButton from './components/WhatsappButton';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <Navbar />
+      <Hero />
+      <Products />
+      <Gallery />
+      <WhyUs />
+      <Reviews />
+      <Enquiry />
+      <Contact />
+      <footer className="footer">
+        <p>© 2025 Shree Jaiswal Furniture House, Ghorasahan, Bihar. All rights reserved.</p>
+      </footer>
+      <WhatsAppButton />
+      <ScrollToTop />
+    </motion.div>
   );
 }
 
