@@ -43,19 +43,10 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
             >
-                <motion.div
-                    className="hero-badge"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    🪑 Trusted Since 2015
-                </motion.div>
-
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.3 }}
                 >
                     Shree Jaiswal <span>Furniture House</span>
                 </motion.h1>
@@ -64,7 +55,7 @@ export default function Hero() {
                     className="hero-sub"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.55 }}
+                    transition={{ delay: 0.45 }}
                 >
                     Premium MDF Furniture — Beds, Sofas & Custom Designs<br />
                     Delivered across East Champaran, Bihar
@@ -74,7 +65,7 @@ export default function Hero() {
                     className="hero-buttons"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 }}
+                    transition={{ delay: 0.6 }}
                 >
                     <motion.a href="#products" className="btn-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
                         View Products
