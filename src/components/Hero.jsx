@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const slides = [
     { img: "/bannner.jpeg" },
@@ -10,26 +10,79 @@ const slides = [
 
 export default function Hero() {
     const [current, setCurrent] = useState(0)
+    const [direction, setDirection] = useState(1)
+    const touchStartX = useRef(null)
+    const mouseStartX = useRef(null)
+    const isDragging = useRef(false)
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrent(prev => (prev + 1) % slides.length)
-        }, 4500)
+        const timer = setInterval(() => goNext(), 4500)
         return () => clearInterval(timer)
-    }, [])
+    }, [current])
+
+    const goNext = () => {
+        setDirection(1)
+        setCurrent(prev => (prev + 1) % slides.length)
+    }
+
+    const goPrev = () => {
+        setDirection(-1)
+        setCurrent(prev => (prev - 1 + slides.length) % slides.length)
+    }
+
+    const goTo = (i) => {
+        setDirection(i > current ? 1 : -1)
+        setCurrent(i)
+    }
+
+    // Touch handlers
+    const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+    const onTouchEnd = (e) => {
+        if (touchStartX.current === null) return
+        const diff = touchStartX.current - e.changedTouches[0].clientX
+        if (Math.abs(diff) > 50) diff > 0 ? goNext() : goPrev()
+        touchStartX.current = null
+    }
+
+    // Mouse drag handlers
+    const onMouseDown = (e) => { mouseStartX.current = e.clientX; isDragging.current = true }
+    const onMouseUp = (e) => {
+        if (!isDragging.current) return
+        const diff = mouseStartX.current - e.clientX
+        if (Math.abs(diff) > 60) diff > 0 ? goNext() : goPrev()
+        isDragging.current = false
+        mouseStartX.current = null
+    }
+    const onMouseLeave = () => { isDragging.current = false }
+
+    const variants = {
+        enter: (dir) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0 }),
+        center: { x: 0, opacity: 1 },
+        exit: (dir) => ({ x: dir > 0 ? "-100%" : "100%", opacity: 0 }),
+    }
 
     return (
-        <div className="hero">
+        <div
+            className="hero"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
+            style={{ userSelect: "none", cursor: "grab" }}
+        >
             {/* Background slider */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                     key={current}
                     className="hero-bg"
                     style={{ backgroundImage: `url('${slides[current].img}')` }}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.2 }}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
                 />
             </AnimatePresence>
 
@@ -79,11 +132,15 @@ export default function Hero() {
                     className="hero-customize-text"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.9 }}
+                    transition={{ delay: 0.8 }}
                 >
                     📐 Contact us for <strong>customize furniture</strong> as per your design & size
                 </motion.p>
             </motion.div>
+
+            {/* Arrows */}
+            <button className="hero-arrow left" onClick={goPrev}>‹</button>
+            <button className="hero-arrow right" onClick={goNext}>›</button>
 
             {/* Dots */}
             <div className="hero-dots">
@@ -91,15 +148,11 @@ export default function Hero() {
                     <button
                         key={i}
                         className={`hero-dot ${i === current ? "active" : ""}`}
-                        onClick={() => setCurrent(i)}
+                        onClick={() => goTo(i)}
                         aria-label={`Slide ${i + 1}`}
                     />
                 ))}
             </div>
-
-            {/* Arrows */}
-            <button className="hero-arrow left" onClick={() => setCurrent((current - 1 + slides.length) % slides.length)}>‹</button>
-            <button className="hero-arrow right" onClick={() => setCurrent((current + 1) % slides.length)}>›</button>
 
             <motion.div className="scroll-indicator" animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>↓</motion.div>
         </div>
