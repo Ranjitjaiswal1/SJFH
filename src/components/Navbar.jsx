@@ -22,6 +22,7 @@ export default function Navbar() {
         { label: "Home", href: "#" },
         { label: "About", href: "#about" },
         { label: "Products", href: "#products" },
+        { label: "Updates", href: "#updates" },
         { label: "Gallery", href: "#gallery" },
         { label: "Why Us", href: "#whyus" },
         { label: "Reviews", href: "#reviews" },

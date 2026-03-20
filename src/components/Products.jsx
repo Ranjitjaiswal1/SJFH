@@ -7,6 +7,9 @@ const products = [
     { name: "Double Sofa", price: "₹18,000", img: "/doublesofa.jpeg", desc: "Stylish double sofa perfect for living rooms" },
     { name: "Bed with Headboard", price: "₹22,000", img: "/bed head.jpeg", desc: "Designer bed with cushioned headboard" },
     { name: "Sofa Double Set", price: "₹28,000", img: "/sofa double.jpeg", desc: "Premium double sofa set for large spaces" },
+    { name: "MDF Almirah", price: "₹20,000", img: "/almari.jpeg", desc: "Spacious wardrobe with smooth MDF finish" },
+    { name: "Designer Almirah", price: "₹22,000", img: "/almari1.jpeg", desc: "Elegant almirah with mirror and storage" },
+    { name: "Premium Wardrobe", price: "₹26,000", img: "/almari2.jpeg", desc: "Large premium wardrobe for bedroom storage" },
 ]
 
 export default function Products() {

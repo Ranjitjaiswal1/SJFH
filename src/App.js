@@ -14,6 +14,8 @@ import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsappButton';
 import ScrollToTop from './components/ScrollToTop';
 
+import Updates from './components/Updates';
+
 function App() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
@@ -21,8 +23,8 @@ function App() {
       <Hero />
       <Marquee />
       <About />
-      <CounterStrip />
       <Products />
+      <Updates />
       <Gallery />
       <WhyUs />
       <Reviews />

@@ -1,10 +1,10 @@
 import { motion } from "framer-motion"
 
 const highlights = [
-    { icon: "🏠", label: "Est. 2015", desc: "Serving Bihar for 10+ years" },
     { icon: "🪵", label: "MDF Experts", desc: "Premium grade materials only" },
     { icon: "📐", label: "Custom Made", desc: "Any size, any design" },
     { icon: "🤝", label: "Trusted", desc: "500+ satisfied families" },
+    { icon: "🚚", label: "Free Delivery", desc: "Within Ghorasahan & nearby" },
 ]
 
 export default function About() {
@@ -20,10 +20,6 @@ export default function About() {
                     viewport={{ once: true }}
                 >
                     <img src="/bannner.jpeg" alt="Shree Jaiswal Furniture" />
-                    <div className="about-img-badge">
-                        <span className="badge-num">10+</span>
-                        <span className="badge-text">Years of<br />Excellence</span>
-                    </div>
                 </motion.div>
 
                 {/* Right - Content */}
@@ -50,7 +46,7 @@ export default function About() {
                         transition={{ delay: 0.4 }}
                         viewport={{ once: true }}
                     >
-                        Crafting Beautiful Furniture <span>Since 2015</span>
+                        Crafting Beautiful Furniture <span>For Your Home</span>
                     </motion.h2>
 
                     <motion.p
