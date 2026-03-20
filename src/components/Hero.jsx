@@ -120,10 +120,10 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                 >
-                    <motion.a href="#products" className="btn-primary" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                    <motion.a href="#products" className="btn-primary" onMouseDown={e => e.stopPropagation()} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
                         View Products
                     </motion.a>
-                    <motion.a href="https://wa.me/919102163272" className="btn-outline" target="_blank" rel="noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                    <motion.a href="https://wa.me/919102163272" className="btn-outline" target="_blank" rel="noreferrer" onMouseDown={e => e.stopPropagation()} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
                         💬 WhatsApp Us
                     </motion.a>
                 </motion.div>
@@ -139,8 +139,8 @@ export default function Hero() {
             </motion.div>
 
             {/* Arrows */}
-            <button className="hero-arrow left" onClick={goPrev}>‹</button>
-            <button className="hero-arrow right" onClick={goNext}>›</button>
+            <button className="hero-arrow left" onMouseDown={e => e.stopPropagation()} onClick={goPrev}>‹</button>
+            <button className="hero-arrow right" onMouseDown={e => e.stopPropagation()} onClick={goNext}>›</button>
 
             {/* Dots */}
             <div className="hero-dots">
@@ -148,6 +148,7 @@ export default function Hero() {
                     <button
                         key={i}
                         className={`hero-dot ${i === current ? "active" : ""}`}
+                        onMouseDown={e => e.stopPropagation()}
                         onClick={() => goTo(i)}
                         aria-label={`Slide ${i + 1}`}
                     />
