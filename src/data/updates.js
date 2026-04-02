@@ -7,10 +7,11 @@
 
 export const news = [
     {
-        date: "20 March 2026",
-        title: "New Almirah Collection Arrived!",
-        desc: "We have added beautiful new MDF almirah designs to our collection. Visit our shop or WhatsApp us to see more.",
-        tag: "New Arrival"
+        date: "27 March 2026",
+        title: "🎉 Grand Opening — 27.03.2026!",
+        desc: "Join us for the Grand Opening of Shree Jaiswal Furniture House at Raj Mandir Gali, Beside Bigu Meat House, Ghorasahan, East Champaran, Bihar — 845303. Starting at 10:00 AM. Everyone is welcome!",
+        tag: "New Arrival",
+        img: "/grand-opening.jpeg"
     },
     {
         date: "10 March 2026",

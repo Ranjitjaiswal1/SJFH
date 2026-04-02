@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { news, newArrivals } from "../data/updates"
 
-const tagColors = {
+const tagColors = { // eslint-disable-line no-unused-vars
     "New Arrival": { bg: "#fff8e1", color: "#b8860b" },
     "Update": { bg: "#e8f5e9", color: "#2e7d32" },
     "Offer": { bg: "#fce4ec", color: "#c62828" },
@@ -73,20 +73,18 @@ export default function Updates() {
                         {news.map((item, i) => (
                             <motion.div
                                 key={i}
-                                className="news-card"
+                                className={`news-card ${item.img ? "news-card-featured" : ""}`}
                                 initial={{ opacity: 0, x: 30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.45, delay: i * 0.12 }}
                                 viewport={{ once: true }}
                                 whileHover={{ x: 4 }}
                             >
+                                {item.img && (
+                                    <img src={item.img} alt={item.title} className="news-banner-img" />
+                                )}
                                 <div className="news-top">
-                                    <span
-                                        className="news-tag"
-                                        style={tagColors[item.tag] || { bg: "#eee", color: "#333" }}
-                                    >
-                                        {item.tag}
-                                    </span>
+                                    <span className="news-tag">{item.tag}</span>
                                     <span className="news-date">{item.date}</span>
                                 </div>
                                 <h4>{item.title}</h4>
