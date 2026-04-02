@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { useCart } from "../context/CartContext"
+import { useWishlist } from "../context/WishlistContext"
+import SearchBar from "./SearchBar"
 
 export default function Navbar() {
     const [open, setOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const [userMenu, setUserMenu] = useState(false)
     const { user, logout } = useAuth()
     const { count } = useCart()
+    const { wishlist } = useWishlist()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -16,8 +20,6 @@ export default function Navbar() {
         window.addEventListener("scroll", onScroll)
         return () => window.removeEventListener("scroll", onScroll)
     }, [])
-
-    const handleNav = () => setOpen(false)
 
     const links = [
         { label: "Home", href: "/" },
@@ -32,15 +34,17 @@ export default function Navbar() {
             className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.7 }}
         >
             <Link to="/" className="navbar-brand">
-                <img src="/logo.jpeg" alt="Shree Jaiswal Furniture House" className="navbar-logo" />
+                <img src="/logo.jpeg" alt="Logo" className="navbar-logo" />
             </Link>
+
+            <SearchBar />
 
             <div className={`navbar-links ${open ? "open" : ""}`}>
                 {links.map((link, i) => (
-                    <motion.a key={i} href={link.href} onClick={handleNav}
+                    <motion.a key={i} href={link.href} onClick={() => setOpen(false)}
                         whileHover={{ color: "#f5c842" }}>
                         {link.label}
                     </motion.a>
@@ -48,22 +52,43 @@ export default function Navbar() {
             </div>
 
             <div className="navbar-actions">
-                <Link to="/cart" className="cart-icon" onClick={handleNav}>
-                    🛒 {count > 0 && <span className="cart-badge">{count}</span>}
+                {/* Wishlist */}
+                <Link to="/wishlist" className="nav-icon-btn" title="Wishlist">
+                    <span>🤍</span>
+                    {wishlist.length > 0 && <span className="nav-badge">{wishlist.length}</span>}
                 </Link>
+
+                {/* Cart */}
+                <Link to="/cart" className="nav-icon-btn" title="Cart">
+                    <span>🛒</span>
+                    {count > 0 && <span className="nav-badge">{count}</span>}
+                </Link>
+
+                {/* User */}
                 {user ? (
-                    <div className="user-menu">
-                        <span className="user-name">👤 {user.name.split(' ')[0]}</span>
-                        {user.role === 'admin' && <Link to="/admin" className="admin-link">Admin</Link>}
-                        <Link to="/orders" className="nav-link-btn">Orders</Link>
-                        <button onClick={() => { logout(); navigate('/') }} className="logout-btn">Logout</button>
+                    <div className="user-dropdown-wrap">
+                        <button className="user-btn" onClick={() => setUserMenu(!userMenu)}>
+                            👤 {user.name.split(' ')[0]} ▾
+                        </button>
+                        <AnimatePresence>
+                            {userMenu && (
+                                <motion.div className="user-dropdown"
+                                    initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
+                                    <Link to="/orders" onClick={() => setUserMenu(false)}>📦 My Orders</Link>
+                                    <Link to="/wishlist" onClick={() => setUserMenu(false)}>❤️ Wishlist</Link>
+                                    {user.role === 'admin' && <Link to="/admin" onClick={() => setUserMenu(false)}>⚙️ Admin Panel</Link>}
+                                    <button onClick={() => { logout(); navigate('/'); setUserMenu(false) }}>🚪 Logout</button>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 ) : (
                     <Link to="/login" className="nav-login-btn">Login</Link>
                 )}
             </div>
 
-            <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+            <button className="hamburger" onClick={() => setOpen(!open)}>
                 <span className={open ? "bar rotate1" : "bar"}></span>
                 <span className={open ? "bar hide" : "bar"}></span>
                 <span className={open ? "bar rotate2" : "bar"}></span>
