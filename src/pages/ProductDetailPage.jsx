@@ -6,6 +6,7 @@ import WhatsAppButton from '../components/WhatsappButton'
 import ScrollToTop from '../components/ScrollToTop'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
+import Recommendations from '../components/Recommendations'
 
 const PINCODES = { '845303': 'Ghorasahan', '845304': 'Motihari', '845401': 'Raxaul', '800001': 'Patna' }
 
@@ -236,6 +237,13 @@ export default function ProductDetailPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Recommendations */}
+                <Recommendations
+                    currentId={product._id}
+                    category={product.category}
+                    title="You May Also Like"
+                />
             </div>
 
             {/* Zoom Modal */}

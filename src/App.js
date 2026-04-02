@@ -28,6 +28,11 @@ import WishlistPage from './pages/WishlistPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import OffersPage from './pages/OffersPage';
+import ShopPage from './pages/ShopPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+
+import TrendingProducts from './components/TrendingProducts';
+import LiveChat from './components/LiveChat';
 
 function HomePage() {
   return (
@@ -36,6 +41,7 @@ function HomePage() {
       <Hero />
       <Marquee />
       <About />
+      <TrendingProducts />
       <Products />
       <Updates />
       <Gallery />
@@ -48,11 +54,10 @@ function HomePage() {
       </footer>
       <WhatsAppButton />
       <ScrollToTop />
+      <LiveChat />
     </motion.div>
   );
 }
-
-import ShopPage from './pages/ShopPage';
 
 function App() {
   return (
