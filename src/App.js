@@ -24,6 +24,10 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrdersPage from './pages/OrdersPage';
 import AdminPage from './pages/AdminPage';
+import WishlistPage from './pages/WishlistPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import OffersPage from './pages/OffersPage';
 
 function HomePage() {
   return (
@@ -48,12 +52,13 @@ function HomePage() {
   );
 }
 
-import WishlistPage from './pages/WishlistPage';
-
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/offers" element={<OffersPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/cart" element={<CartPage />} />

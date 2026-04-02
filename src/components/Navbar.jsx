@@ -23,10 +23,11 @@ export default function Navbar() {
 
     const links = [
         { label: "Home", href: "/" },
-        { label: "About", href: "/#about" },
+        { label: "About", href: "/about" },
         { label: "Products", href: "/#products" },
+        { label: "Offers", href: "/offers" },
         { label: "Gallery", href: "/#gallery" },
-        { label: "Contact", href: "/#contact" },
+        { label: "Contact", href: "/contact" },
     ]
 
     return (
