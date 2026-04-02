@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useCart } from "../context/CartContext"
 import { useWishlist } from "../context/WishlistContext"
+import { useNavigate } from "react-router-dom"
 
 const products = [
     { _id: "p1", name: "Modern MDF Bed", price: 25000, img: "/bed.jpeg", desc: "Elegant king-size bed with premium MDF finish", category: "Bed", rating: 4.5, reviews: 28, stock: 5, delivery: "3-5 days" },
@@ -35,6 +36,7 @@ export default function Products() {
     const [recentlyViewed, setRecentlyViewed] = useState([])
     const { addToCart } = useCart()
     const { toggle, isWishlisted } = useWishlist()
+    const navigate = useNavigate()
 
     let filtered = activeCategory === "All" ? products : products.filter(p => p.category === activeCategory)
 
@@ -56,6 +58,10 @@ export default function Products() {
             const filtered = prev.filter(i => i._id !== p._id)
             return [p, ...filtered].slice(0, 4)
         })
+    }
+
+    const handleOpenDetail = (p) => {
+        navigate(`/product/${p._id}`, { state: { product: p } })
     }
 
     return (
@@ -140,6 +146,9 @@ export default function Products() {
                                         WhatsApp
                                     </motion.a>
                                 </div>
+                                <button className="view-detail-btn" onClick={() => handleOpenDetail(p)}>
+                                    View Full Details →
+                                </button>
                             </div>
                         </motion.div>
                     ))}

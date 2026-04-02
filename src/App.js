@@ -52,6 +52,8 @@ function HomePage() {
   );
 }
 
+import ProductDetailPage from './pages/ProductDetailPage';
+
 function App() {
   return (
     <Routes>
@@ -59,6 +61,7 @@ function App() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/offers" element={<OffersPage />} />
+      <Route path="/product/:id" element={<ProductDetailPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/cart" element={<CartPage />} />
