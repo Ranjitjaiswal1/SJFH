@@ -52,13 +52,14 @@ function HomePage() {
   );
 }
 
-import ProductDetailPage from './pages/ProductDetailPage';
+import ShopPage from './pages/ShopPage';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/shop" element={<ShopPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/offers" element={<OffersPage />} />
       <Route path="/product/:id" element={<ProductDetailPage />} />
